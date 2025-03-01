@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Kết Quả Ảnh - Photo Booth</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0; 
+      padding: 0;
+    }
+    body {
+      font-family: sans-serif;
+      background-color: #f9f9f9;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+    }
+    h1 {
+      margin: 20px 0;
+      font-size: 1.5rem;
+      text-align: center;
+    }
+    /* Khung dọc hiển thị 4 ảnh */
+    .vertical-strip {
+      position: relative; /* để chứa sticker */
+      background-color: #fff;
+      width: 300px;
+      padding: 20px;
+      border: 4px solid #ff69b4; /* Màu viền mặc định */
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+    /* 4 ảnh xếp dọc */
+    .vertical-strip img {
+      width: 100%;
+      height: auto;
+      border-radius: 5px;
+      object-fit: cover;
+    }
+    /* Footer text (thời gian + thương hiệu) */
+    .footer-text {
+      font-size: 0.9rem;
+      color: #555;
+      margin-top: 10px;
+      text-align: center;
+    }
+    /* Chọn màu viền */
+    .color-palette {
+      display: flex;
+      gap: 10px;
+      margin: 10px 0;
+    }
+    .color-swatch {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      cursor: pointer;
+      border: 2px solid #fff;
+      transition: transform 0.2s;
+    }
+    .color-swatch:hover {
+      transform: scale(1.1);
+    }
+
+    /* Khu vực sticker: nhiều icon + NO STICKER */
+    .sticker-list {
+      display: flex;
+      gap: 10px;
+      margin: 10px 0;
+    }
+    /* Nút sticker bo tròn, màu gradient */
+    .sticker-item {
+      font-size: 1.5rem;
+      padding: 10px;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      background: linear-gradient(45deg, #ff4081, #ff80ab);
+      color: #fff;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.16);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 50px;
+      height: 50px;
+    }
+    .sticker-item:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 12px rgba(0,0,0,0.16);
+    }
+
+    /* Sticker (emoji) được gắn vào .vertical-strip */
+    .sticker-emoji {
+      position: absolute;
+      font-size: 1rem;    /* Giảm kích thước sticker */
+      pointer-events: none; 
+    }
+    /* Nút tải ảnh về (bo tròn, màu gradient) */
+    .download-btn {
+      margin: 20px 0;
+      padding: 12px 24px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      background: linear-gradient(45deg, #ff4081, #ff80ab);
+      color: #fff;
+      font-weight: 600;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.16);
+    }
+    .download-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 12px rgba(0,0,0,0.16);
+    }
+  </style>
+</head>
+<body>
+  <h1>Kết Quả Ảnh</h1>
+
+  <!-- Chọn màu viền (palette) -->
+  <div class="color-palette" id="colorPalette">
+    <!-- Thêm/bớt màu tuỳ ý -->
+    <div class="color-swatch" data-color="#ff69b4" style="background-color: #ff69b4;"></div>
+    <div class="color-swatch" data-color="#a2d5f2" style="background-color: #a2d5f2;"></div>
+    <div class="color-swatch" data-color="#b2f2a1" style="background-color: #b2f2a1;"></div>
+    <div class="color-swatch" data-color="#f2e8a1" style="background-color: #f2e8a1;"></div>
+    <div class="color-swatch" data-color="#f2a1a1" style="background-color: #f2a1a1;"></div>
+  </div>
+
+  <!-- Khu vực sticker: nhiều icon (thỏ, lấp lánh, ngôi sao, trái tim) + NO STICKER -->
+  <div class="sticker-list" id="stickerList">
+    <div class="sticker-item" data-sticker="🐰">🐰</div>
+    <div class="sticker-item" data-sticker="✨">✨</div>
+    <div class="sticker-item" data-sticker="⭐">⭐</div>
+    <div class="sticker-item" data-sticker="❤️">❤️</div>
+    <!-- Nút NO STICKER -->
+    <div class="sticker-item" data-sticker="NONE">🚫</div>
+  </div>
+
+  <!-- Khung dọc chứa 4 ảnh -->
+  <div class="vertical-strip" id="photoStrip">
+    <!-- 4 ảnh sẽ được chèn ở đây -->
+    <div class="footer-text" id="footerText"></div>
+  </div>
+
+  <!-- Nút tải ảnh (sẽ chụp màn hình .vertical-strip) -->
+  <button class="download-btn" id="downloadBtn">Tải Ảnh Về</button>
+
+  <!-- Thư viện html2canvas (CDN) -->
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+
+  <script>
+    // Lấy 4 ảnh từ localStorage
+    const photos = JSON.parse(localStorage.getItem('capturedPhotos')) || [];
+
+    // DOM elements
+    const photoStrip = document.getElementById('photoStrip');
+    const footerText = document.getElementById('footerText');
+    const colorPalette = document.getElementById('colorPalette');
+    const stickerList = document.getElementById('stickerList');
+    const downloadBtn = document.getElementById('downloadBtn');
+
+    // Hiển thị 4 ảnh xếp dọc
+    photos.forEach(src => {
+      const img = document.createElement('img');
+      img.src = src;
+      // Thêm trước footerText để ảnh nằm trên, text nằm cuối
+      photoStrip.insertBefore(img, footerText);
+    });
+
+    // Thêm ngày giờ + thương hiệu
+    const now = new Date();
+    function formatDate(date) {
+      const dd = String(date.getDate()).padStart(2, '0');
+      const mm = String(date.getMonth() + 1).padStart(2, '0');
+      const yyyy = date.getFullYear();
+      let hours = date.getHours();
+      let ampm = 'AM';
+      if (hours >= 12) {
+        ampm = 'PM';
+      }
+      hours = hours % 12 || 12;
+      const hh = String(hours).padStart(2, '0');
+      const min = String(date.getMinutes()).padStart(2, '0');
+      return `${mm}/${dd}/${yyyy}  ${hh}:${min} ${ampm}`;
+    }
+    const dateStr = formatDate(now);
+    footerText.textContent = `  ${dateStr}  © ${now.getFullYear()} AW`;
+
+    // 1) Đổi màu viền khi click vào "chấm màu"
+    colorPalette.addEventListener('click', (e) => {
+      if (e.target.classList.contains('color-swatch')) {
+        const color = e.target.getAttribute('data-color');
+        photoStrip.style.borderColor = color;
+      }
+    });
+
+    // 2) Sticker chỉ xung quanh ảnh, kích thước nhỏ
+    //    Thay vì rải khắp ảnh, ta rải ở 4 cạnh: top, bottom, left, right.
+    //    Hoặc rải 8 sticker xung quanh (random edge).
+    function clearOldStickers() {
+      const oldStickers = document.querySelectorAll('.sticker-emoji');
+      oldStickers.forEach(st => st.remove());
+    }
+
+    function addStickers(emoji) {
+      // Xoá sticker cũ
+      clearOldStickers();
+      // Tìm tất cả <img> (4 ảnh)
+      const images = photoStrip.querySelectorAll('img');
+      images.forEach(img => {
+        placeStickersAroundEdges(emoji, photoStrip, img, 8);
+      });
+    }
+
+    // Hàm rải 'stickerCount' sticker quanh các cạnh (top/bottom/left/right)
+    // => sticker sẽ chỉ xuất hiện quanh viền ảnh, kích thước nhỏ (font-size:1rem)
+    function placeStickersAroundEdges(emoji, container, image, stickerCount=8) {
+      const containerRect = container.getBoundingClientRect();
+      const rect = image.getBoundingClientRect();
+
+      // Tọa độ ảnh so với container
+      const offsetLeft = rect.left - containerRect.left;
+      const offsetTop  = rect.top  - containerRect.top;
+      const imgWidth   = rect.width;
+      const imgHeight  = rect.height;
+
+      for (let i = 0; i < stickerCount; i++) {
+        const sticker = document.createElement('div');
+        sticker.className = 'sticker-emoji';
+        sticker.textContent = emoji;
+
+        // Chọn ngẫu nhiên 1 trong 4 cạnh: 0=top,1=right,2=bottom,3=left
+        const edge = Math.floor(Math.random() * 4);
+        // Tính vị trí x,y
+        let x, y;
+        switch(edge) {
+          case 0: // top
+            x = offsetLeft + Math.random() * imgWidth;
+            y = offsetTop - 10; // Lên trên 1 chút
+            break;
+          case 1: // right
+            x = offsetLeft + imgWidth + 10; // Dịch sang phải
+            y = offsetTop + Math.random() * imgHeight;
+            break;
+          case 2: // bottom
+            x = offsetLeft + Math.random() * imgWidth;
+            y = offsetTop + imgHeight + 10; 
+            break;
+          case 3: // left
+            x = offsetLeft - 10;
+            y = offsetTop + Math.random() * imgHeight;
+            break;
+        }
+
+        sticker.style.left = x + 'px';
+        sticker.style.top  = y + 'px';
+        container.appendChild(sticker);
+      }
+    }
+
+    // Khi click sticker-item => thêm sticker quanh viền, hoặc NO STICKER
+    stickerList.addEventListener('click', (e) => {
+      if (e.target.classList.contains('sticker-item')) {
+        const emoji = e.target.getAttribute('data-sticker');
+        if (emoji === 'NONE') {
+          clearOldStickers();
+        } else {
+          addStickers(emoji);
+        }
+      }
+    });
+
+    // 3) Nút "Tải Ảnh Về" (chụp .vertical-strip bằng html2canvas)
+    downloadBtn.addEventListener('click', () => {
+      html2canvas(photoStrip).then(canvas => {
+        const link = document.createElement('a');
+        link.download = 'photo-strip.png';
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+      });
+    });
+  </script>
+</body>
+</html>

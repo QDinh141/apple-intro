@@ -1,0 +1,1426 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giới thiệu về Apple</title>
+    <style>
+        body { .select-container {
+  margin-bottom: 15px;
+}
+
+/* Style cho ô select */
+.select-container select {
+  appearance: none;             /* Bỏ style mặc định của trình duyệt */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-color: #f9f9f9;    /* Màu nền nhẹ */
+  border: 2px solid #0070c9;    /* Đường viền màu xanh */
+  padding: 10px 15px;
+  border-radius: 5px;
+  font-size: 16px;
+  color: #333;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  width: 100%;
+}
+
+/* Thêm mũi tên tùy chỉnh */
+.select-container {
+  position: relative;
+}
+
+.select-container::after {
+  content: "▼";
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: #0070c9;
+}
+
+/* Hiệu ứng khi focus */
+.select-container select:focus {
+  border-color: #005fa3;
+  box-shadow: 0 0 5px rgba(0, 95, 163, 0.5);
+  outline: none;
+}
+
+       
+/* Thêm vào phần <style> */
+.back-to-top {
+    position: fixed;
+    bottom: 20px; /* Cách đáy 20px */
+    left: 20px; /* Cách trái 20px */
+    background-color: rgba(0, 112, 201, 0.5); /* Màu nền trong suốt */
+    color: white; /* Màu chữ */
+    padding: 5px 10px; /* Khoảng cách bên trong */
+    border-radius: 5px; /* Bo góc nhẹ */
+    text-decoration: none; /* Bỏ gạch chân */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Đổ bóng */
+    transition: background-color 0.3s ease; /* Hiệu ứng chuyển màu */
+    font-size: 14px; /* Kích thước chữ nhỏ hơn */
+}
+
+.back-to-top:hover {
+    background-color: rgba(0, 112, 201, 0.8); /* Màu nền khi hover */
+}
+            scroll-behavior: smooth;
+            background-color: #f5f5f7;
+        }
+
+        header {
+            background: url('https://www.apple.com/v/apple-events/home/ag/images/overview/recent-events/gallery/oct-2023__e5difzriqeqa_large_2x.jpg') no-repeat center;
+            background-size: cover;
+            color: #fff;
+            text-align: center;
+            padding: 60px 0;
+            font-size: 32px;
+            font-weight: bold;
+            position: relative;
+        }
+
+        header nav {
+            position: sticky;
+            top: 0;
+            background: #000;
+            padding: 10px 0;
+            z-index: 100;
+        }
+
+        header nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+        }
+
+        header nav ul li {
+            margin: 0 20px;
+        }
+
+        header nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        header nav ul li a:hover {
+            color: #f1f1f1;
+        }
+
+        h2 {
+            text-align: center;
+            padding-top: 10px;
+        }
+
+        .product, .service, .testimonial, .feature {
+            margin: 30px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            text-align: center;
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+
+        .product:hover, .service:hover, .testimonial:hover, .feature:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .product img, .service img, .feature img {
+            width: 80%;
+            max-width: 500px;
+            display: block;
+            margin: 0 auto;
+            border-radius: 10px;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .product img:hover, .service img:hover, .feature img:hover {
+            transform: scale(1.05);
+        }
+
+        .video-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            text-align: center;
+            margin: 20px 0;
+            position: relative;
+        }
+
+        .overlay-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 48px; /* Increased font size */
+            font-weight: bold;
+            color: white;
+            padding: 5px 10px;
+            z-index: 1; /* Ensures the text is above the video */
+        }
+
+        video {
+            width: 80%;
+            max-width: 800px;
+            border-radius: 10px;
+        }
+
+        .description-box {
+            background-color: #fff;
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            max-width: 800px;
+            text-align: center;
+            margin: 0 auto;
+        }
+
+        .description-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .description-box p {
+            font-size: 18px;
+            color: #333;
+            margin: 0;
+        }
+
+        /* Add an interactive button */
+        .cta-button {
+            background-color: #0070c9;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            margin-top: 20px;
+            display: inline-block;
+            transition: background-color 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background-color: #005fa3;
+        }
+
+        /* Product Price Section */
+        #apple-prices {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        h2 {
+            font-size: 36px;
+            font-weight: bold;
+            margin-bottom: 30px;
+        }
+
+        /* Container chứa các sản phẩm */
+        .product-container {
+            display: flex;
+            justify-content: center;
+            overflow-x: auto;
+            white-space: nowrap;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        /* Thẻ sản phẩm */
+        .product-card {
+            display: inline-block;
+            width: 250px;
+            text-align: center;
+            border: 1px solid #ddd;
+            padding: 20px;
+            border-radius: 8px;
+            background-color: #fff;
+            opacity: 0.5; /* Mờ đi khi chưa hover */
+            transition: opacity 0.3s ease, transform 0.3s ease; /* Hiệu ứng mượt mà */
+        }
+
+        .product-card img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            transition: transform 0.3s ease; /* Zoom ảnh */
+        }
+
+        .product-card:hover {
+            opacity: 1; /* Làm rõ khi hover */
+            transform: scale(1.05); /* Zoom nhẹ khi hover */
+        }
+
+        .product-card:hover img {
+            transform: scale(1.1); /* Zoom ảnh rõ ràng hơn */
+        }
+
+        .product-card h3 {
+            margin: 10px 0;
+            font-size: 24px;
+            font-weight: 600;
+        }
+
+        .product-card p {
+            color: #333;
+            font-size: 16px;
+            
+        }
+         .feature {
+            margin: 30px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s ease-in-out;
+        }
+
+        .feature img {
+            width: 80%;
+            max-width: 300px;
+            display: block;
+            margin: 10px auto 0;
+            border-radius: 10px;
+            transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+            transform: translateY(100%);
+            opacity: 0;
+            position: absolute;
+            left: 50%;
+            transform: translate(-50%, 100%);
+        }
+
+        .feature:hover {
+            padding-bottom: 220px; /* Mở rộng ô để vừa với khung ảnh */
+        }
+
+        .feature:hover img {
+            transform: translate(-50%, 0);
+            opacity: 1;
+            }
+/* Thanh tìm kiếm */
+#search {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#searchBar {
+    width: 60%;
+    padding: 10px;
+    font-size: 18px;
+    border: 2px solid #0070c9;
+    border-radius: 25px;
+    outline: none;
+    transition: 0.3s;
+}
+
+#searchBar:focus {
+    border-color: #005fa3;
+    box-shadow: 0 0 10px rgba(0, 112, 201, 0.5);
+}
+
+/* Ẩn timeline-item khi không khớp */
+.timeline-item.hidden {
+    display: none;
+}
+        #comparison {
+            text-align: center;
+            margin: 50px auto;
+            max-width: 90%;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-selection {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .select-container {
+            background: #0070c9;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            color: white;
+            font-size: 16px;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        select {
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: none;
+            outline: none;
+            width: 200px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #0070c9;
+            color: white;
+            font-size: 18px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f5f5f5;
+        }
+
+        tr:hover {
+            background-color: #e0e0e0;
+            transition: 0.3s ease-in-out;
+        }
+
+        .hidden {
+            display: none;}
+          
+        #blog-section {
+            max-width: 90%;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #0070c9;
+        }
+
+        .news-container {
+            display: flex;
+            gap: 20px;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            padding-bottom: 15px;
+            scrollbar-width: none; /* Ẩn thanh cuộn trên Firefox */
+        }
+
+        .news-container::-webkit-scrollbar {
+            display: none; /* Ẩn thanh cuộn trên Chrome */
+        }
+
+        .news-card {
+            background: white;
+            width: 300px;
+            min-width: 300px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: 0.3s ease-in-out;
+            scroll-snap-align: center;
+        }
+
+        .news-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .news-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+
+        .news-content {
+            padding: 15px;
+        }
+
+        .news-content h3 {
+            font-size: 18px;
+            color: #333;
+            margin: 0 0 10px;
+        }
+
+        .news-content p {
+            font-size: 14px;
+            color: #555;
+            margin: 0 0 15px;
+        }
+
+        .read-more {
+            display: block;
+            text-align: center;
+            padding: 10px;
+            background: #0070c9;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+
+        .read-more:hover {
+            background: #005fa3;
+        }
+        /* Footer */
+footer {
+    background-color: #000;
+    color: #fff;
+    padding: 40px 20px;
+    text-align: center;
+    font-size: 14px;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    text-align: left;
+}
+
+.footer-section {
+    flex: 1;
+    min-width: 250px;
+    margin-bottom: 20px;
+}
+
+.footer-section h3 {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-section ul li {
+    margin-bottom: 8px;
+}
+
+.footer-section ul li a {
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.footer-section ul li a:hover {
+    color: #0070c9;
+}
+
+/* Social media icons */
+.social-icons {
+    display: flex;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.social-icons a {
+    display: inline-block;
+    color: white;
+    font-size: 20px;
+    transition: transform 0.3s ease-in-out;
+}
+
+.social-icons a:hover {
+    transform: scale(1.2);
+}
+
+/* Copyright */
+.footer-bottom {
+    margin-top: 20px;
+    font-size: 12px;
+    border-top: 1px solid #333;
+    padding-top: 10px;
+}
+
+         .info-box {
+            display: block; /* Hiển thị khung thông tin theo mặc định */
+            margin-left: 10px; /* Khoảng cách giữa hình ảnh và khung thông tin */
+            background-color: white; /* Màu nền trắng cho khung thông tin */
+            border: 1px solid #ddd; /* Đường viền màu xám nhạt */
+            padding: 10px; /* Khoảng cách bên trong khung thông tin */
+            border-radius: 5px; /* Bo góc cho khung thông tin */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Đổ bóng cho khung thông tin */ 
+            z-index: 10; /* Đảm bảo khung thông tin nằm trên các phần tử khác */
+            max-width: 3000px; /* Đặt chiều rộng tối đa cho khung thông tin */
+            opacity: 0; /* Đặt độ mờ ban đầu là 0 */
+            visibility: hidden; /* Ẩn khung thông tin */
+            transition: opacity 0.3s ease, visibility 0.3s ease; /* Hiệu ứng chuyển tiếp */
+        }
+
+        .product:hover .info-box {
+            opacity: 1; /* Đặt độ mờ thành 1 khi hiển thị */
+            visibility: visible; /* Đặt khung thông tin thành có thể nhìn thấy */
+            .cta-button {
+  display: inline-block;
+  background-color: #0070c9;
+  color: #fff;
+  padding: 12px 20px;
+  text-decoration: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.cta-button:hover {
+  background-color: #005fa3;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+        }
+    </style>
+</head>
+<body>
+    <header>
+    <h1>Giới thiệu về Apple</h1>
+    <nav>
+        <ul>
+            <li><a href="#products">Sản phẩm</a></li>
+            <li><a href="#features">Tính năng</a></li>
+            <li><a href="#apple-tv">Apple TV+</a></li>
+            <li><a href="#apple-arcade">Apple Arcade</a></li>
+            <li><a href="#apple-os">Hệ điều hành</a></li>
+            <li><a href="#testimonials">Phản hồi</a></li>
+            <li><a href="#comparison">So sánh</a></li>
+        </ul>
+    </nav>
+</header>
+<section id="search">
+    <input type="text" id="searchBar" placeholder="Tìm kiếm sự kiện..." onkeyup="searchTimeline()">
+</section>
+
+<section id="timeline">
+    <h2>Lịch sử Apple</h2>
+    <div class="timeline-container">
+        <div class="timeline-item left">
+            <div class="timeline-date">1976</div>
+            <div class="timeline-content">
+                <h3>Thành lập Apple</h3>
+                <p>Steve Jobs, Steve Wozniak và Ronald Wayne sáng lập Apple tại một gara ở California.</p>
+            </div>
+        </div>
+        <div class="timeline-item right">
+            <div class="timeline-date">1984</div>
+            <div class="timeline-content">
+                <h3>Ra mắt Macintosh</h3>
+                <p>Chiếc máy tính Macintosh đầu tiên được giới thiệu, mang giao diện đồ họa đến với người dùng.</p>
+            </div>
+        </div>
+        <div class="timeline-item left">
+            <div class="timeline-date">2001</div>
+            <div class="timeline-content">
+                <h3>Ra mắt iPod</h3>
+                <p>Apple thay đổi ngành công nghiệp âm nhạc với iPod và iTunes.</p>
+            </div>
+        </div>
+        <div class="timeline-item right">
+            <div class="timeline-date">2007</div>
+            <div class="timeline-content">
+                <h3>Ra mắt iPhone</h3>
+                <p>iPhone đầu tiên được giới thiệu, đánh dấu một cuộc cách mạng trong ngành di động.</p>
+            </div>
+        </div>
+        <div class="timeline-item left">
+            <div class="timeline-date">2015</div>
+            <div class="timeline-content">
+                <h3>Ra mắt Apple Watch</h3>
+                <p>Apple mở ra kỷ nguyên đồng hồ thông minh với Apple Watch.</p>
+            </div>
+        </div>
+        <div class="timeline-item right">
+            <div class="timeline-date">2020</div>
+            <div class="timeline-content">
+                <h3>Ra mắt Apple Silicon</h3>
+                <p>Apple giới thiệu dòng chip M1, đánh dấu sự chuyển đổi từ Intel sang chip do Apple thiết kế.</p>
+            </div>
+        </div>
+        <div class="timeline-item left">
+            <div class="timeline-date">2023</div>
+            <div class="timeline-content">
+                <h3>Ra mắt Vision Pro</h3>
+                <p>Apple công bố Vision Pro, sản phẩm thực tế hỗn hợp mang tính cách mạng.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    #timeline {
+        text-align: center;
+        padding: 40px 0;
+        background: #fff;
+        position: relative;
+    }
+    .timeline-container {
+        position: relative;
+        max-width: 800px;
+        margin: 0 auto;
+    }
+    .timeline-item {
+        display: flex;
+        align-items: center;
+        background: #f5f5f7;
+        padding: 20px;
+        border-radius: 10px;
+        margin: 10px 0;
+        width: 45%;
+        position: relative;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        opacity: 0;
+        transform: translateY(30px);
+        transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+    .timeline-item.left {
+        left: 0;
+    }
+    .timeline-item.right {
+        left: 55%;
+    }
+    .timeline-date {
+        font-weight: bold;
+        font-size: 20px;
+        width: 100px;
+        text-align: center;
+        margin-right: 20px;
+    }
+    .timeline-content {
+        text-align: left;
+    }
+    .timeline-container::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 50%;
+        width: 4px;
+        height: 100%;
+        background: #0070c9;
+        transform: translateX(-50%);
+    }
+    .timeline-item::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 100%;
+        width: 10px;
+        height: 10px;
+        background: #0070c9;
+        border-radius: 50%;
+        transform: translate(-50%, -50%);
+    }
+    .timeline-item.right::after {
+        left: 0;
+        transform: translate(-50%, -50%);
+    }
+    .timeline-item:hover {
+        transform: scale(1.05);
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+    }
+    
+    /* Hiệu ứng hiển thị khi cuộn */
+    .timeline-item.show {
+        opacity: 1;
+        transform: translateY(0);
+    }
+</style>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const items = document.querySelectorAll(".timeline-item");
+        
+        function checkScroll() {
+            let triggerBottom = window.innerHeight * 0.85;
+            items.forEach(item => {
+                const itemTop = item.getBoundingClientRect().top;
+                if (itemTop < triggerBottom) {
+                    item.classList.add("show");
+                }
+            });
+        }
+        
+        window.addEventListener("scroll", checkScroll);
+        checkScroll();
+    });
+</script>
+
+    <section id="products">
+    <h2>Các sản phẩm nổi bật</h2>
+    <div class="product">
+        <h3>iPhone</h3>
+        <img src="https://www.apple.com/v/iphone/home/ca/images/overview/select/iphone_16pro__erw9alves2qa_large_2x.png" alt="iPhone">
+         <div class="info-box">
+            
+            <p>iPhone là một trong những sản phẩm điện thoại thông minh hàng đầu thế giới, nổi bật với thiết kế tinh tế, hiệu năng mạnh mẽ và hệ sinh thái ứng dụng phong phú. Với camera chất lượng cao và các tính năng tiên tiến, iPhone mang đến trải nghiệm người dùng tuyệt vời.</p>
+        </div>
+        <p>Điện thoại đẳng cấp với công nghệ tiên tiến.</p>
+<a href="https://www.apple.com/iphone" class="cta-button" target="_blank">Khám phá iPhone</a>    </div>
+    <div class="product">
+        <h3>MacBook</h3>
+        <img src="https://www.apple.com/v/mac/home/cb/images/overview/select/product_tile_mbp_14_16__bkl8zusnkpw2_large_2x.png" alt="MacBook">
+        <div class="info-box">
+            
+            <p>MacBook mang đến hiệu suất vượt trội với thiết kế mỏng nhẹ, giúp bạn dễ dàng mang theo bên mình. Với màn hình Retina sắc nét và thời lượng pin lâu dài, MacBook là lựa chọn hoàn hảo cho công việc và giải trí.</p> 
+          </div> 
+        <p>Máy tính xách tay mạnh mẽ, lý tưởng cho sáng tạo.</p>
+<a href="https://www.apple.com/macbook" class="cta-button" target="_blank">Khám phá MacBook</a>    </div>
+    <!-- Thêm iPad -->
+    <div class="product">
+        <h3>iPad</h3>
+        <img src="https://www.apple.com/vn/ipad-air/images/overview/highlights/overview__ftbt78x57ueu_large_2x.png" alt="iPad">
+        <div class="info-box">
+          
+            <p>iPad kết hợp sức mạnh của máy tính với sự tiện lợi của một thiết bị di động. Với màn hình lớn và các ứng dụng phong phú, iPad là công cụ lý tưởng cho việc học tập, làm việc và giải trí.</p>
+        </div>
+        <p>Máy tính bảng mạnh mẽ và linh hoạt, lý tưởng cho công việc và giải trí.</p>
+      <a href="https://www.apple.com/ipad" class="cta-button" target="_blank">Khám phá iPad</a>
+    </div>
+    <!-- Thêm AirPods -->
+    <div class="product">
+        <h3>AirPods</h3>
+        <img src="https://www.apple.com/v/airpods-max/h/images/overview/contrast/airpods_max_midnight__ddy8oa1y3y4i_large_2x.png" alt="AirPods">
+        
+     <div class="info-box">
+            
+            <p>AirPods mang đến trải nghiệm âm thanh tuyệt vời với công nghệ chống ồn và khả năng kết nối liền mạch với các thiết bị Apple. Với thiết kế nhỏ gọn và thời lượng pin lâu dài, AirPods là lựa chọn hoàn hảo cho những ai yêu thích âm nhạc và sự tiện lợi.</p>
+        </div>
+        <p>Âm thanh chất lượng cao, thiết kế tiện lợi và kết nối nhanh chóng.</p>
+  <a href="https://www.apple.com/airpods" class="cta-button" target="_blank">Khám phá AirPods</a>
+    </div>
+</section>
+
+
+    <!-- Apple Price Section -->
+    <section id="apple-prices">
+    <h2>Giá bán các sản phẩm Apple</h2>
+    <div class="product-container">
+        <div class="product-card">
+            <img src="https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/iphone14-digitalmat-gallery-3-202209?wid=728&hei=666&fmt=png-alpha&.v=1662055813794" alt="iPhone 14">
+            <h3>iPhone 14</h3>
+            <p>Giá: 22,990,000 VND</p>
+        </div>
+        <div class="product-card">
+            <img src="https://www.apple.com/v/macbook-air/s/images/overview/performance/compare/model_mba_m2__cfrbip6c05yq_large_2x.jpg" alt="MacBook Air">
+            <h3>MacBook Air</h3>
+            <p>Giá: 34,990,000 VND</p>
+        </div>
+        <div class="product-card">
+            <img src="https://www.apple.com/v/ipad-pro/ar/images/overview/contrast/product-tile/ipad_air__crdt2g2u9z0i_medium_2x.jpg" alt="iPad Pro">
+            <h3>iPad Pro</h3>
+            <p>Giá: 29,990,000 VND</p>
+        </div>
+        <div class="product-card">
+            <img src="https://www.apple.com/vn/apple-tv-4k/images/overview/router/apple_tv_app_new__d96grv6awv8m_large_2x.jpg" alt="Apple TV 4K">
+            <h3>Apple TV 4K</h3>
+            <p>Giá: 5,990,000 VND</p>
+        </div>
+        <div class="product-card">
+            <img src="https://www.apple.com/v/apple-watch-series-10/b/images/overview/contrast/product_se__f3k18492qcey_large_2x.png" alt="Apple Watch SE">
+            <h3>Apple Watch SE</h3>
+            <p>Giá: 8,990,000 VND</p>
+        </div>
+        <div class="product-card">
+            <img src="https://www.apple.com/v/airpods-max/h/images/overview/contrast/airpods_max_midnight__ddy8oa1y3y4i_large_2x.png" alt="AirPods Max">
+            <h3>AirPods Max</h3>
+            <p>Giá: 13,990,000 VND</p>
+        </div>
+        <div class="product-card">
+            <img src="https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/imac-touch-id-blue-selection-hero-202410?wid=904&hei=840&fmt=jpeg&qlt=90&.v=1729800486533">
+            <h3>iMac 24 inch</h3>
+            <p>Giá: 39,990,000 VND</p>
+        </div>
+        <div class="product-card">
+            <img src="https://www.apple.com/v/homepod/p/images/overview/hero__ernd10zm1dsi_large_2x.jpg" alt="HomePod">
+            <h3>HomePod</h3>
+            <p>Giá: 7,990,000 VND</p>
+        </div>
+        <div class="product-card">
+            <img src="https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/MX2D3?wid=1144&hei=1144&fmt=jpeg&qlt=90&.v=1713841707336" alt="Apple Pencil 2">
+            <h3>Apple Pencil Pro</h3>
+            <p>Giá: 3,490,000 VND</p>
+        </div>
+        <div class="product-card">
+            <img src="https://www.apple.com/v/mac-studio/f/images/overview/routers/trade_in__nrxfc8dv4b2u_large_2x.jpg" alt="Mac Studio">
+            <h3>Mac Studio</h3>
+            <p>Giá: 59,990,000 VND</p>
+        </div>
+    </div>
+</section>
+
+
+    <section id="features">
+        <h2>Tính năng đặc biệt</h2>
+        <div class="feature">
+            <h3>Face ID</h3>
+            <p>Công nghệ nhận diện khuôn mặt tiên tiến.</p>
+            <img src="https://cdsassets.apple.com/live/7WUAS350/images/ios/ios-17-iphone-15-pro-setup-face-id.png" alt="Face ID">
+        </div>
+        <div class="feature">
+            <h3>Apple Pay</h3>
+            <p>Thanh toán an toàn và tiện lợi.</p>
+            <img src="https://www.apple.com/vn/apple-pay/images/overview/cash__ckeull360moi_large_2x.png" alt="Apple Pay">
+        </div>
+        <div class="feature">
+            <h3>iCloud</h3>
+            <p>Lưu trữ dữ liệu an toàn trên đám mây.</p>
+            <img src="https://www.intego.com/mac-security-blog/wp-content/uploads/2021/02/icloud-hero.png" alt="iCloud">
+        </div>
+        <div class="feature">
+            <h3>AirDrop</h3>
+            <p>Chia sẻ file nhanh chóng và dễ dàng giữa các thiết bị Apple.</p>
+            <img src="https://support.apple.com/library/content/dam/edam/applecare/images/pt_BR/iOS/ios-16-iphone-13-pro-send-airdrop-share-sheet.png" alt="AirDrop">
+        </div>
+        <div class="feature">
+            <h3>Siri</h3>
+            <p>Trợ lý ảo thông minh giúp bạn điều khiển các thiết bị Apple bằng giọng nói.</p>
+            <img src="https://i.pinimg.com/originals/c1/14/12/c114123eb48fc0712b2482264414d9d7.gif" alt="Siri">
+        </div>
+        <div class="feature">
+            <h3>Find My</h3>
+            <p>Chức năng tìm kiếm và bảo vệ thiết bị Apple của bạn khi bị mất.</p>
+            <img src="https://www.apple.com/v/icloud/ah/images/meta/og__cu0qwzuuysq6_findmy.png?202502040934" alt="Find My">
+        </div>
+    </section>
+    <!-- Apple TV+ Section -->
+    <section id="apple-tv">
+        <h2 style="font-size: 36px; font-weight: bold;">Apple TV+</h2>
+        <div class="video-container">
+            <div class="overlay-text">Apple TV+</div>
+            <video autoplay loop muted>   
+                <source src="https://www.apple.com/105/media/us/apple-tv-plus/2024/bcf2fe5a-eb2c-4ae9-b289-a8dac7eb5f1c/anim/sizzle/large.mp4" type="video/mp4">
+            </video>
+            
+            <div class="description-box">
+                <p>
+                    Apple TV+ cung cấp các bộ phim và chương trình truyền hình gốc, mang đến những trải nghiệm giải trí không giới hạn với chất lượng cao.
+                </p>
+            </div>
+       <a href="https://www.apple.com/apple-tv-plus/" class="cta-button" target="_blank">Khám phá Apple TV+</a>
+        </div>
+    </section>
+
+    <!-- Apple Arcade Section -->
+    <section id="apple-arcade">
+        <h2 style="font-size: 36px; font-weight: bold;">Apple Arcade</h2>
+        <div class="video-container">
+            <div class="overlay-text">Apple Arcade</div>
+            <video autoplay loop muted>   
+                <source src="https://www.apple.com/105/media/us/apple-arcade/2024/434e69f2-99de-45bf-be24-1ce11a66d4f1/anim/hero/large.mp4" type="video/mp4">
+            </video>
+            
+            <div class="description-box">
+                <p>
+                    Apple Arcade cung cấp bộ sưu tập game không giới hạn, phù hợp với mọi sở thích và lứa tuổi, mang lại trải nghiệm chơi game đỉnh cao.
+                </p>
+            </div>
+ <a href="https://www.apple.com/apple-arcade/" class="cta-button" target="_blank">Khám phá Apple Arcade</a>        </div>
+    </section>
+
+</section>
+
+<section id="apple-events" style="position: relative; overflow: hidden; width: 100vw; height: 100vh;">
+    <video autoplay muted loop playsinline style="position: absolute; top: 50%; left: 50%; width: auto; height: auto; min-width: 100%; min-height: 100%; transform: translate(-50%, -50%); object-fit: cover; z-index: -1; filter: brightness(50%) blur(5px);">
+        <source src="https://www.apple.com/105/media/us/apple-events/2024/de49429c-da1f-446d-8280-ebc5c3830b40/anim/teaser/large_2x.mp4" type="video/mp4">
+    </video>
+    <h2 style="position: relative; z-index: 1; color: white; text-align: center;">Các sự kiện Apple</h2>
+    <div class="events-container">
+        <div class="event-item">
+            <img src="https://www.apple.com/v/apple-events/home/ag/images/overview/recent-events/gallery/jun-2024__ekxn97e2n2uu_large_2x.jpg" alt="WWDC">
+            <p><strong>WWDC</strong> - Hội nghị các nhà phát triển toàn cầu diễn ra hằng năm.</p>
+        </div>
+        <div class="event-item">
+            <img src="https://www.apple.com/v/apple-events/home/ag/images/overview/recent-events/gallery/sep-2023__dvukal3juemq_large_2x.jpg" alt="Sự kiện iPhone">
+            <p><strong>Sự kiện iPhone</strong> - Sự kiện ra mắt iPhone mới vào mỗi tháng 9.</p>
+        </div>
+        <div class="event-item">
+            <img src="https://www.apple.com/v/apple-events/home/ag/images/overview/recent-events/gallery/jun-2023__cjqmmqlyd21y_large_2x.jpg" alt="Sự kiện mùa xuân">
+            <p><strong>Sự kiện mùa xuân</strong> - Apple thường giới thiệu iPad, Mac và các sản phẩm khác.</p>
+        </div>
+        <div class="event-item">
+            <img src="https://www.apple.com/v/apple-events/home/ag/images/overview/recent-events/gallery/sep-2022__cssrr2kb1b6u_large_2x.jpg" alt="Sự kiện mùa thu">
+            <p><strong>Sự kiện mùa thu</strong> - Tập trung vào Mac và các thiết bị khác.</p>
+        </div>
+    </div>
+</section>
+
+<style>
+    .events-container {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        padding: 20px 0;
+        position: relative;
+        z-index: 1;
+    }
+    .event-item {
+        text-align: center;
+        width: 350px;
+        background: rgba(255, 255, 255, 0.8);
+        padding: 15px;
+        border-radius: 10px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .event-item img {
+        width: 100%;
+        border-radius: 10px;
+    }
+    .event-item:hover {
+        transform: scale(1.1);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+</style>
+
+</section>
+
+</section>
+
+<section id="apple-os" style="position: relative; padding: 100px 50px 50px; background-color: #f8f9fa; text-align: center; overflow-x: auto; z-index: 10; border: 2px solid #ddd; border-radius: 15px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);">
+    <h2>Các hệ điều hành của Apple</h2>
+    <div class="os-container">
+        <div class="os-item" id="ios">
+            <img src="https://cdn-bcnka.nitrocdn.com/NVxbShrNzFVWhOlazgZRovbVgBDmvaQf/assets/images/optimized/rev-f22752c/usmsystems.com/wp-content/uploads/2024/11/Apple-iOS-18.jpg" alt="iOS">
+            <p><strong>iOS</strong> - Hệ điều hành cho iPhone.</p>
+        </div>
+        <div class="os-item">
+            <img src="https://www.apple.com/v/macos/macos-sequoia/a/images/meta/macos-sequoia__qclpvh6m08ay_og.png" alt="macOS">
+            <p><strong>macOS</strong> - Hệ điều hành cho Mac.</p>
+        </div>
+        <div class="os-item">
+            <img src="https://www.apple.com/newsroom/images/2024/09/watchos-11-is-available-today/article/geo/Apple-watchOS-11-hero-geo_big.jpg.medium.jpg" alt="watchOS">
+            <p><strong>watchOS</strong> - Hệ điều hành cho Apple Watch.</p>
+        </div>
+        <div class="os-item">
+            <img src="https://www.apple.com/newsroom/images/product/tv/standard/Apple-TV-4K-hero-221018_big.jpg.large.jpg" alt="tvOS">
+            <p><strong>tvOS</strong> - Hệ điều hành cho Apple TV.</p>
+        </div>
+    </div>
+</section>
+
+<style>
+    .os-container {
+        display: flex;
+        justify-content: flex-start;
+        gap: 20px;
+        padding: 20px 0;
+        position: relative;
+        z-index: 20;
+        overflow-x: auto;
+        white-space: nowrap;
+        scroll-behavior: smooth;
+    }
+    .os-item {
+        text-align: center;
+        width: 350px;
+        min-width: 350px;
+        background: rgba(255, 255, 255, 0.9);
+        padding: 15px;
+        border-radius: 10px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        z-index: 30;
+        border: 1px solid #ccc;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    .os-item img {
+        width: 100%;
+        border-radius: 10px;
+    }
+    .os-item:hover {
+        transform: scale(1.1);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  
+</style>
+
+
+<section id="testimonials">
+    <h2>Phản hồi của khách hàng</h2>
+
+    <div class="testimonial">
+        <div class="testimonial-content">
+            <h3>Nguyễn Văn A</h3>
+            <p><strong>Sản phẩm: iPhone 15 Pro Max</strong></p>
+            <p>"Chiếc iPhone này thực sự đẳng cấp! Camera siêu nét và hiệu năng tuyệt vời."</p>
+        </div>
+    </div>
+
+    <div class="testimonial">
+        <div class="testimonial-content">
+            <h3>Trần Thị B</h3>
+            <p><strong>Sản phẩm: MacBook Air M2</strong></p>
+            <p>"MacBook Air M2 quá nhẹ và pin siêu lâu, rất thích hợp cho công việc văn phòng."</p>
+        </div>
+    </div>
+
+    <div class="testimonial">
+        <div class="testimonial-content">
+            <h3>Lê Văn C</h3>
+            <p><strong>Sản phẩm: AirPods Pro 2</strong></p>
+            <p>"Âm thanh trong trẻo, chống ồn cực tốt. Trải nghiệm nghe nhạc rất tuyệt vời!"</p>
+        </div>
+    </div>
+</section>
+
+<style>
+    #testimonials {
+        text-align: center;
+        padding: 40px 20px;
+        background-color: #f5f5f7;
+    }
+
+    .testimonial {
+        background: #ffffff;
+        padding: 20px;
+        margin: 15px auto;
+        border-radius: 12px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        max-width: 600px;
+        text-align: left;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        border: 2px solid transparent;
+    }
+
+    .testimonial-content {
+        padding: 15px;
+    }
+
+    .testimonial h3 {
+        color: #0070c9;
+        margin-bottom: 8px;
+    }
+
+    .testimonial p {
+        font-size: 16px;
+        color: #333;
+    }
+
+    /* Hover Effect */
+    .testimonial:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+        border-color: #0070c9;
+    }
+</style>
+
+
+</script>
+<section id="comparison">
+  <h2>So sánh sản phẩm Apple</h2>
+  <div class="select-container">
+    <label for="product1">Chọn sản phẩm 1:</label>
+    <select id="product1">
+      <option value="">-- Chọn sản phẩm --</option>
+      <option value="iphone15">iPhone 15 Pro</option>
+      <option value="iphone14">iPhone 14 Pro</option>
+      <option value="ipad">iPad Pro</option>
+      <option value="macbook">MacBook Pro</option>
+      <!-- Thêm các sản phẩm khác nếu cần -->
+    </select>
+  </div>
+  <div class="select-container">
+    <label for="product2">Chọn sản phẩm 2:</label>
+    <select id="product2">
+      <option value="">-- Chọn sản phẩm --</option>
+      <option value="iphone15">iPhone 15 Pro</option>
+      <option value="iphone14">iPhone 14 Pro</option>
+      <option value="ipad">iPad Pro</option>
+      <option value="macbook">MacBook Pro</option>
+      <!-- Thêm các sản phẩm khác nếu cần -->
+    </select>
+  </div>
+  <div id="comparison-table"></div>
+</section>
+    
+</section>
+<section id="blog-section">
+    <h2>Tin tức & Blog</h2>
+
+    <div class="news-container">
+        <!-- Bài viết 1 -->
+        <div class="news-card">
+            <img src="https://www.apple.com/newsroom/images/2023/09/apple-unveils-iphone-15-pro-and-iphone-15-pro-max/article/Apple-iPhone-15-Pro-lineup-hero-230912_Full-Bleed-Image.jpg.large_2x.jpg" alt="iPhone 15 Pro">
+            <div class="news-content">
+                <h3>Apple ra mắt iPhone 15 Pro với Titan siêu bền</h3>
+                <p>iPhone 15 Pro chính thức trình làng với khung Titan siêu nhẹ, chip A17 Pro mạnh mẽ...</p>
+               <a href="https://www.apple.com/vn/newsroom/2023/09/apple-unveils-iphone-15-pro-and-iphone-15-pro-max/" class="read-more" target="_blank">Đọc tiếp</a>
+            </div>
+        </div>
+
+        <!-- Bài viết 2 -->
+        <div class="news-card">
+            <img src="https://www.apple.com/newsroom/images/2024/10/new-macbook-pro/article/Apple-MacBook-Pro-M4-lineup_big.jpg.large_2x.jpg" alt="MacBook M3">
+            <div class="news-content">
+                <h3>MacBook Air M4 có gì mới?</h3>
+                <p>Apple giới thiệu MacBook Air M4 với hiệu năng mạnh hơn, màn hình 120Hz ProMotion...</p>
+                 <a href="https://www.apple.com/vn/macbook-pro/" class="read-more" target="_blank">Đọc tiếp</a>
+            </div>
+        </div>
+
+        <!-- Bài viết 3 -->
+        <div class="news-card">
+            <img src="https://www.apple.com/newsroom/images/2024/10/apple-intelligence-is-available-today-on-iphone-ipad-and-mac/article/Apple-Intelligence-Siri-Apple-TV-Plus-action_big.jpg.large_2x.jpg" alt="Mẹo sử dụng iPad">
+            <div class="news-content">
+                <h3>Mẹo hay giúp bạn tối ưu iPad cho công việc</h3>
+                <p>iPad không chỉ để giải trí, bạn có thể tận dụng nó để làm việc hiệu quả hơn với những mẹo sau...</p>
+<a href="https://www.apple.com/vn/accessibility/" class="read-more" target="_blank">Đọc tiếp</a>            </div>
+        </div>
+
+        <!-- Bài viết 4 -->
+        <div class="news-card">
+            <img src="https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/watch-card-40-s10-202409?wid=680&hei=528&fmt=p-jpg&qlt=95&.v=1724168059157" alt="Apple Watch Series 9">
+            <div class="news-content">
+                <h3>Apple Watch Series 9 - Trợ lý sức khỏe thông minh</h3>
+                <p>Apple Watch Series 9 ra mắt với cảm biến nhiệt độ, đo oxy trong máu và nhiều cải tiến AI...</p>
+                              <a href="https://www.apple.com/vn/apple-watch-series-9" class="read-more" target="_blank">Đọc tiếp</a>
+            </div>
+        </div>
+
+        <!-- Bài viết 5 -->
+        <div class="news-card">
+            <img src="https://www.apple.com/newsroom/images/2024/09/ios-18-is-available-today-making-iphone-more-personal-and-capable-than-ever/article/Apple-iOS-18-Maps-hiking-routes_inline.jpg.large_2x.jpg" alt="iOS 18">
+            <div class="news-content">
+                <h3>iOS 18: Những tính năng đáng mong chờ</h3>
+                <p>iOS 18 sẽ mang đến giao diện tùy chỉnh hơn, AI thông minh hơn và nhiều nâng cấp lớn...</p>
+                <a href="https://www.apple.com/vn/ios/ios-18/" class="read-more" target="_blank">Đọc tiếp</a>
+            </div>
+        </div>
+    </div>
+ <section id="recommended-features">
+    <h2>Tính năng đề xuất</h2>
+    <div class="feature">
+        <h3>Chụp Photo Booth</h3>
+        <p>Trải nghiệm chụp ảnh vui nhộn với nhiều hiệu ứng độc đáo.</p>
+        <div class="image-container">
+            <img src="https://cdn.eva.vn/upload/2-2024/images/2024-05-08/trao-luu-chup-anh-photo-booth-cua-gioi-tre-6-dia-chi-sang---xin---min-nhat-ha-thanh-_4_2_n-1715178358-629-width780height523.jpg" alt="Photo Booth">
+        </div>
+        <div class="button-container">
+            <a href="photo.html" class="cta-button">Khám phá ngay</a>
+        </div>
+    </div>
+</section>
+
+<style>
+    #recommended-features {
+        text-align: center;
+        padding: 40px;
+        background: #f5f5f7;
+    }
+
+    .feature {
+        margin: 30px auto;
+        padding: 20px;
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        max-width: 800px;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+        transition: all 0.5s ease-in-out;
+    }
+
+    .image-container {
+        width: 100%;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.5s ease-in-out, opacity 0.5s ease-in-out;
+        opacity: 0;
+    }
+
+    .feature:hover {
+        padding-bottom: 250px; /* Kéo dài khung khi hover */
+    }
+
+    .feature:hover .image-container {
+        max-height: 300px;
+        opacity: 1;
+    }
+
+    .feature img {
+        width: 80%;
+        max-width: 300px;
+        display: block;
+        margin: 0 auto;
+        border-radius: 10px;
+        transition: transform 0.5s ease-in-out;
+    }
+
+    .button-container {
+        margin-top: 20px;
+        transition: transform 0.5s ease-in-out;
+    }
+
+    .feature:hover .button-container {
+        transform: translateY(200px); /* Đẩy nút xuống dưới khi hover */
+    }
+
+    .cta-button {
+        background-color: #0070c9;
+        color: white;
+        padding: 10px 20px;
+        text-decoration: none;
+        border-radius: 5px;
+        font-weight: bold;
+        display: inline-block;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .cta-button:hover {
+        background-color: #005fa3;
+        transform: scale(1.1);
+    }
+</style>
+
+
+ <footer>
+    <div class="footer-container">
+        <!-- Cột 1: Liên hệ -->
+        <div class="footer-section">
+            <h3>Liên hệ</h3>
+            <p>Email: support@apple.com</p>
+            <p>Điện thoại: 1800-1127</p>
+        </div>
+
+        <!-- Cột 2: Mạng xã hội -->
+        <div class="footer-section">
+            <h3>Kết nối với chúng tôi</h3>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+            </div>
+        </div>
+
+        <!-- Cột 3: Chính sách -->
+        <div class="footer-section">
+            <h3>Chính sách</h3>
+            <ul>
+                <li><a href="#">Chính sách bảo mật</a></li>
+                <li><a href="#">Điều khoản sử dụng</a></li>
+                <li><a href="#">Bản đồ site</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Copyright -->
+    <div class="footer-bottom">
+        ©  Chào mừng đến với Bình Nguyên Vô Tận.
+    </div>
+</footer>
+<!-- Thêm vào cuối phần <body> -->
+<a href="#" id="backToTop" class="back-to-top">Quay lại đầu trang</a>
+<script>
+// Dữ liệu thông số của sản phẩm
+const productData = {
+  iphone15: {
+    name: "iPhone 15 Pro",
+    screen: '6.1" Super Retina XDR',
+    chip: "A17 Pro",
+    ram: "8GB",
+    camera: "48MP + 12MP + 12MP",
+    battery: "23 giờ",
+    price: "$999"
+  },
+  iphone14: {
+    name: "iPhone 14 Pro",
+    screen: '6.1" Super Retina XDR',
+    chip: "A16 Bionic",
+    ram: "6GB",
+    camera: "48MP + 12MP + 12MP",
+    battery: "22 giờ",
+    price: "$899"
+  },
+  ipad: {
+    name: "iPad Pro",
+    screen: '12.9" Liquid Retina XDR',
+    chip: "M2",
+    ram: "16GB",
+    camera: "12MP Ultra Wide",
+    battery: "10 giờ",
+    price: "$1,099"
+  },
+  macbook: {
+    name: "MacBook Pro",
+    screen: '13.6" Liquid Retina',
+    chip: "M3",
+    ram: "16GB",
+    camera: "1080p FaceTime HD",
+    battery: "18 giờ",
+    price: "$1,199"
+  }
+};
+
+// Hàm cập nhật bảng so sánh dựa trên lựa chọn của người dùng
+function updateComparisonTable() {
+  const select1 = document.getElementById('product1');
+  const select2 = document.getElementById('product2');
+  const product1 = select1.value;
+  const product2 = select2.value;
+  const comparisonDiv = document.getElementById('comparison-table');
+
+  // Kiểm tra nếu chưa chọn đủ 2 sản phẩm
+  if (!product1 || !product2) {
+    comparisonDiv.innerHTML = "<p>Vui lòng chọn đủ 2 sản phẩm để so sánh!</p>";
+    return;
+  }
+
+  // Các tiêu chí so sánh
+  const criteria = ['screen', 'chip', 'ram', 'camera', 'battery', 'price'];
+  let html = `<table border="1" cellpadding="10" cellspacing="0">
+                <thead>
+                  <tr>
+                    <th>Thông số</th>
+                    <th>${productData[product1].name}</th>
+                    <th>${productData[product2].name}</th>
+                  </tr>
+                </thead>
+                <tbody>`;
+  criteria.forEach(crit => {
+    html += `<tr>
+               <td>${crit.charAt(0).toUpperCase() + crit.slice(1)}</td>
+               <td>${productData[product1][crit]}</td>
+               <td>${productData[product2][crit]}</td>
+             </tr>`;
+  });
+  html += '</tbody></table>';
+
+  comparisonDiv.innerHTML = html;
+}
+
+// Lắng nghe sự thay đổi của cả 2 dropdown
+document.getElementById('product1').addEventListener('change', updateComparisonTable);
+document.getElementById('product2').addEventListener('change', updateComparisonTable);
+</script>
+
+</body>
+</html>        
+
+
+

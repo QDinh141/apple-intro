@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Photo Booth - Chụp 4 Ảnh Dọc</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: sans-serif;
+      background-color: #f9f9f9;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 70px; /* Giúp camera nằm thấp hơn đầu trang */
+    }
+    h1 {
+      margin-bottom: 20px;
+      font-size: 1.5rem;
+    }
+    /* Bố cục 2 cột: video (trái) - 4 ảnh dọc (phải) */
+    .container {
+      display: flex;
+      flex-direction: row;
+      gap: 20px;
+      align-items: flex-start;
+    }
+    /* Khối chứa video + nút */
+    .video-container {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+    /* Phóng to camera, bo góc nhiều hơn */
+    video {
+      width: 600px;       /* Tăng kích thước để camera to hơn */
+      height: auto;
+      border: 2px solid #ccc;
+      border-radius: 20px; 
+      background: #000;
+      transform: scaleX(-1); /* Lật gương */
+    }
+    /* Cột chứa 4 ảnh dọc (canvas) */
+    .preview-container {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    canvas {
+      width: 120px;
+      height: 120px;
+      border: 2px solid #ccc;
+      border-radius: 5px;
+      background: #fff;
+      object-fit: cover;
+    }
+    /* Khu vực chứa nút */
+    .buttons {
+      display: flex;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    /* Nút bo tròn, màu gradient, hiệu ứng hover */
+    button {
+      padding: 12px 24px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 30px; 
+      cursor: pointer;
+      background: linear-gradient(45deg, #ff4081, #ff80ab);
+      color: #fff;
+      font-weight: 600;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.16);
+    }
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 12px rgba(0,0,0,0.16);
+    }
+    /* Đếm ngược hiển thị ở giữa video */
+    .countdown {
+      position: absolute;
+      color: red;
+      font-size: 2rem;
+      font-weight: bold;
+      background: rgba(255,255,255,0.7);
+      padding: 20px;
+      border-radius: 10px;
+      display: none;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  </style>
+</head>
+<body>
+  <h1>Photo Booth - Chụp 4 Ảnh Dọc</h1>
+
+  <div class="container">
+    <!-- Cột 1: Video -->
+    <div class="video-container">
+      <video id="video" autoplay></video>
+      <div class="buttons">
+        <button id="btnCapture">Chụp 4 Ảnh</button>
+      </div>
+      <div class="countdown" id="countdown"></div>
+    </div>
+
+    <!-- Cột 2: 4 ảnh xem trước (theo chiều dọc) -->
+    <div class="preview-container">
+      <canvas id="canvas1"></canvas>
+      <canvas id="canvas2"></canvas>
+      <canvas id="canvas3"></canvas>
+      <canvas id="canvas4"></canvas>
+    </div>
+  </div>
+
+  <script>
+    const video = document.getElementById('video');
+    const btnCapture = document.getElementById('btnCapture');
+    const countdownEl = document.getElementById('countdown');
+
+    const canvases = [
+      document.getElementById('canvas1'),
+      document.getElementById('canvas2'),
+      document.getElementById('canvas3'),
+      document.getElementById('canvas4'),
+    ];
+
+    // Truy cập camera
+    navigator.mediaDevices.getUserMedia({ video: true })
+      .then(stream => {
+        video.srcObject = stream;
+      })
+      .catch(err => console.error("Không thể truy cập camera:", err));
+
+    // Hàm đếm ngược
+    function startCountdown(seconds, callback) {
+      countdownEl.style.display = 'block';
+      countdownEl.textContent = seconds;
+      let interval = setInterval(() => {
+        seconds--;
+        countdownEl.textContent = seconds;
+        if (seconds <= 0) {
+          clearInterval(interval);
+          countdownEl.style.display = 'none';
+          callback();
+        }
+      }, 1000);
+    }
+
+    // Hàm chụp ảnh
+    function capturePhoto(canvas) {
+      const ctx = canvas.getContext('2d');
+      // Đặt kích thước đủ lớn để ảnh rõ hơn
+      canvas.width = 400;
+      canvas.height = 400;
+      // Lật ngang (mirror)
+      ctx.translate(canvas.width, 0);
+      ctx.scale(-1, 1);
+      // Vẽ video vào canvas
+      ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+    }
+
+    // Chụp liên tiếp 4 ảnh
+    btnCapture.addEventListener('click', () => {
+      let index = 0;
+
+      function captureNext() {
+        if (index < canvases.length) {
+          startCountdown(3, () => {
+            capturePhoto(canvases[index]);
+            index++;
+            setTimeout(captureNext, 500); // Chờ 0.5s trước khi chụp ảnh tiếp theo
+          });
+        } else {
+          // Lưu tất cả ảnh vào localStorage rồi chuyển sang trang kết quả
+          const imagesData = canvases.map(cv => cv.toDataURL('image/png', 1.0));
+          localStorage.setItem('capturedPhotos', JSON.stringify(imagesData));
+          window.location.href = 'result.html';
+        }
+      }
+      captureNext();
+    });
+  </script>
+</body>
+</html>
